@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Clinic CRM - Mobile-First Patient Management
 
-## Getting Started
+A mobile-first clinic CRM webapp for managing patients, prescriptions, and billing.
 
-First, run the development server:
+## Tech Stack
+- **Framework**: Next.js 14 (App Router)
+- **Database**: Neon (Serverless PostgreSQL)
+- **ORM**: Drizzle ORM
+- **Styling**: Tailwind CSS
+- **Deployment**: Vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+- Patient Management (add, view, edit patients)
+- Prescription Management
+- Billing & Invoicing
+- Mobile-first responsive design with bottom navigation
+
+## Setup
+
+1. **Create Neon Database**
+   - Go to [neon.tech](https://neon.tech) and create a free account
+   - Create a new project and copy the connection string
+
+2. **Configure Environment**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your Neon connection string
+   ```
+
+3. **Run Database Migrations**
+   ```bash
+   npx drizzle-kit push
+   ```
+
+4. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+
+## Deploy to Vercel
+
+1. Push your code to GitHub
+2. Go to [Vercel](https://vercel.com) and import the repository
+3. Add the `DATABASE_URL` environment variable with your Neon connection string
+4. Deploy!
+
+## Project Structure
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+src/
+├── app/           # Next.js app router pages
+│   ├── patients/  # Patient management
+│   ├── prescriptions/  # Prescription management
+│   ├── billing/   # Billing & invoicing
+│   └── page.tsx   # Dashboard
+├── components/    # Reusable UI components
+├── db/           # Database schema and connection
+└── lib/          # Utility functions
+```

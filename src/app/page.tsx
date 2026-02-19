@@ -1,65 +1,78 @@
-import Image from "next/image";
+import { Users, Pill, CreditCard, Calendar, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+
+const stats = [
+  { label: 'Total Patients', value: '124', icon: Users, href: '/patients', color: 'bg-blue-500' },
+  { label: 'Prescriptions', value: '89', icon: Pill, href: '/prescriptions', color: 'bg-green-500' },
+  { label: 'Pending Bills', value: '12', icon: CreditCard, href: '/billing', color: 'bg-orange-500' },
+  { label: 'Appointments', value: '8', icon: Calendar, href: '/', color: 'bg-purple-500' },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+        <span className="text-sm text-gray-500">Today</span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        {stats.map((stat) => (
+          <Link
+            key={stat.label}
+            href={stat.href}
+            className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className={`${stat.color} w-10 h-10 rounded-lg flex items-center justify-center mb-3`}>
+              <stat.icon className="w-5 h-5 text-white" />
+            </div>
+            <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+            <p className="text-sm text-gray-500">{stat.label}</p>
+          </Link>
+        ))}
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-semibold text-gray-900">Recent Patients</h2>
+          <Link href="/patients" className="text-blue-600 text-sm flex items-center gap-1">
+            View all <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
-      </main>
+        <div className="space-y-3">
+          {[
+            { name: 'John Smith', time: '10:30 AM', type: 'Checkup' },
+            { name: 'Sarah Johnson', time: '11:00 AM', type: 'Follow-up' },
+            { name: 'Mike Davis', time: '2:00 PM', type: 'New Patient' },
+          ].map((patient, i) => (
+            <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+              <div>
+                <p className="font-medium text-gray-900">{patient.name}</p>
+                <p className="text-sm text-gray-500">{patient.type}</p>
+              </div>
+              <span className="text-sm text-gray-400">{patient.time}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <h2 className="font-semibold text-gray-900 mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-2 gap-3">
+          <Link href="/patients/new" className="bg-blue-50 text-blue-700 p-3 rounded-lg text-center font-medium">
+            + New Patient
+          </Link>
+          <Link href="/prescriptions/new" className="bg-green-50 text-green-700 p-3 rounded-lg text-center font-medium">
+            + New Prescription
+          </Link>
+          <Link href="/billing/new" className="bg-orange-50 text-orange-700 p-3 rounded-lg text-center font-medium">
+            + Create Invoice
+          </Link>
+          <Link href="/patients" className="bg-gray-50 text-gray-700 p-3 rounded-lg text-center font-medium">
+            View Patients
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
