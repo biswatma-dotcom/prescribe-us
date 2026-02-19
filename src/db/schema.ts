@@ -2,6 +2,7 @@ import { pgTable, serial, varchar, text, timestamp, integer, decimal, boolean } 
 
 export const patients = pgTable('patients', {
   id: serial('id').primaryKey(),
+  organizationId: varchar('organization_id', { length: 255 }).notNull(),
   firstName: varchar('first_name', { length: 100 }).notNull(),
   lastName: varchar('last_name', { length: 100 }).notNull(),
   email: varchar('email', { length: 255 }),
@@ -16,6 +17,7 @@ export const patients = pgTable('patients', {
 
 export const prescriptions = pgTable('prescriptions', {
   id: serial('id').primaryKey(),
+  organizationId: varchar('organization_id', { length: 255 }).notNull(),
   patientId: integer('patient_id').references(() => patients.id).notNull(),
   medication: text('medication').notNull(),
   dosage: varchar('dosage', { length: 100 }).notNull(),
@@ -27,6 +29,7 @@ export const prescriptions = pgTable('prescriptions', {
 
 export const appointments = pgTable('appointments', {
   id: serial('id').primaryKey(),
+  organizationId: varchar('organization_id', { length: 255 }).notNull(),
   patientId: integer('patient_id').references(() => patients.id).notNull(),
   appointmentDate: timestamp('appointment_date').notNull(),
   reason: varchar('reason', { length: 255 }),
@@ -37,6 +40,7 @@ export const appointments = pgTable('appointments', {
 
 export const invoices = pgTable('invoices', {
   id: serial('id').primaryKey(),
+  organizationId: varchar('organization_id', { length: 255 }).notNull(),
   patientId: integer('patient_id').references(() => patients.id).notNull(),
   amount: decimal('amount', { precision: 10, scale: 2 }).notNull(),
   description: text('description').notNull(),
@@ -48,6 +52,7 @@ export const invoices = pgTable('invoices', {
 
 export const communications = pgTable('communications', {
   id: serial('id').primaryKey(),
+  organizationId: varchar('organization_id', { length: 255 }).notNull(),
   patientId: integer('patient_id').references(() => patients.id).notNull(),
   type: varchar('type', { length: 50 }).notNull(),
   subject: varchar('subject', { length: 255 }).notNull(),
