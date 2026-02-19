@@ -30,7 +30,7 @@ export function BottomNav() {
 export function Sidebar() {
   return (
     <aside className="hidden md:flex flex-col w-64 bg-gray-900 text-white min-h-screen p-4">
-      <h1 className="text-xl font-bold mb-8 px-4">Clinic CRM</h1>
+      <h1 className="text-xl font-bold mb-8 px-4">PrescribeUs</h1>
       <nav className="flex flex-col gap-2">
         {navItems.map((item) => (
           <Link

@@ -1,4 +1,4 @@
-# Clinic CRM - Mobile-First Patient Management
+# PrescribeUs - Mobile-First Patient Management
 
 A mobile-first clinic CRM webapp for managing patients, prescriptions, and billing.
 

@@ -5,7 +5,7 @@ import { BottomNav, Sidebar } from "@/components/Navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clinic CRM",
+  title: "PrescribeUs",
   description: "Mobile-first clinic management system",
 };
 
